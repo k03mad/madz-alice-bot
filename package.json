@@ -1,36 +1,36 @@
 {
-	"name": "madz-alice-bot",
-	"version": "1.0.0",
-	"description": "Alice Telegram Bot",
-	"maintainers": [
-		"Kirill Molchanov <k03.mad@gmail.com"
-	],
-	"repository": "k03mad/madz-alice-bot",
-	"license": "MIT",
-	"private": true,
-	"engines": {
-		"node": ">=17"
-	},
-	"dependencies": {
-		"@k03mad/utils": "19.5.4",
-		"node-telegram-bot-api": "0.54.0"
-	},
-	"devDependencies": {
-		"@k03mad/eslint-config": "8.2.3",
-		"eslint": "7.32.0",
-		"eslint-plugin-jsdoc": "37.0.3",
-		"eslint-plugin-node": "11.1.0",
-		"eslint-plugin-promise": "5.1.1",
-		"eslint-plugin-sort-requires": "2.1.0",
-		"eslint-plugin-unicorn": "39.0.0",
-		"husky": "7.0.4",
-		"nodemon": "2.0.15"
-	},
-	"scripts": {
-		"lint": "eslint ./ --report-unused-disable-directives --format=codeframe --ignore-pattern='!.*'",
-		"setup": "npm i",
-		"debug": "DEBUG=* nodemon -e js ./app/bot",
-		"start": "pm2 start pm2.json",
-		"prepare": "husky install"
-	}
+  "name": "madz-alice-bot",
+  "version": "1.0.0",
+  "description": "Alice Telegram Bot",
+  "maintainers": [
+    "Kirill Molchanov <k03.mad@gmail.com"
+  ],
+  "repository": "k03mad/madz-alice-bot",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": ">=17"
+  },
+  "dependencies": {
+    "@k03mad/utils": "19.5.4",
+    "node-telegram-bot-api": "0.54.0"
+  },
+  "devDependencies": {
+    "@k03mad/eslint-config": "8.2.3",
+    "eslint": "7.32.0",
+    "eslint-plugin-jsdoc": "37.0.3",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "5.1.1",
+    "eslint-plugin-sort-requires": "2.1.0",
+    "eslint-plugin-unicorn": "39.0.0",
+    "husky": "7.0.4",
+    "nodemon": "2.0.15"
+  },
+  "scripts": {
+    "lint": "eslint ./ --report-unused-disable-directives --format=codeframe --ignore-pattern='!.*'",
+    "setup": "npm i",
+    "debug": "DEBUG=* nodemon -e js ./app/bot",
+    "start": "pm2 start pm2.json",
+    "prepare": "husky install"
+  }
 }
