@@ -12,7 +12,7 @@ errorsHandler(bot);
 bot.on('text', async ({text, chat: {id}}) => {
     const value = trimText(text);
     const valueLen = value.length;
-    const sendMsg = msg => bot.sendMessage(id, msg);
+    const sendMsg = (msg, opts = {}) => bot.sendMessage(id, msg, opts);
 
     if (allowedChats.includes(id)) {
         if (valueLen > MAX_MESSAGE_LEN) {
@@ -24,16 +24,23 @@ bot.on('text', async ({text, chat: {id}}) => {
         } else {
             try {
                 await iot.send({value});
-            } catch {
-                try {
-                    await promise.delay(RETRY_PAUSE);
-                    await iot.send({value});
-                } catch (err) {
-                    return sendMsg(err.message);
+            } catch (err) {
+                if (err.response.statusCode === 403) {
+                    try {
+                        await promise.delay(RETRY_PAUSE);
+                        await iot.send({value});
+                    } catch (err_) {
+                        return sendMsg(err_.message);
+                    }
                 }
+
+                return sendMsg(err.message);
             }
 
-            return sendMsg('✓');
+            return sendMsg(
+                `Отправлено:\n\n\`\`\`\n${value}\n\`\`\``,
+                {parse_mode: 'Markdown'},
+            );
         }
     }
 });

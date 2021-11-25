@@ -5,9 +5,11 @@
  * @returns {string}
  */
 const trimText = text => text
+    .replaceAll('!', ',')
     .replace(/\n+/g, '. ')
-    .replace(/[^ ,.:=?a-zа-яё-]/gi, ' ')
+    .replace(/[^\d ,.:=?a-zа-яё-]/gi, ' ')
     .replace(/ +/g, ' ')
+    .replaceAll(' .', '.')
     .trim();
 
 module.exports = {trimText};
