@@ -20,7 +20,7 @@ bot.on('text', async ({text, chat: {id}}) => {
         } else {
             try {
                 await iot.send({value});
-                await sendMsg('✓');
+                await sendMsg('`✓`');
             } catch (err) {
                 await sendMsg(err.message);
             }
