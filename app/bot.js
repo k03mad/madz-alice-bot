@@ -10,26 +10,27 @@ const {trimText} = require('./utils/data');
 errorsHandler(bot);
 
 bot.on('text', async ({text, chat: {id}}) => {
-    const value = trimText(text);
-    const valueLen = value.length;
+    const tts = trimText(text);
+    const ttsLength = tts.length;
+
     const sendMsg = (msg, opts = {}) => bot.sendMessage(id, msg, opts);
 
     if (allowedChats.includes(id)) {
-        if (valueLen > MAX_MESSAGE_LEN) {
-            await sendMsg(`Команда Алисе должна быть не длиннее 100 символов\n\nОтправлено: ${valueLen}`);
+        if (ttsLength > MAX_MESSAGE_LEN) {
+            await sendMsg(`Команда Алисе должна быть не длиннее 100 символов\n\nОтправлено: ${ttsLength}`);
 
-        } else if (valueLen < MIN_MESSAGE_LEN) {
+        } else if (ttsLength < MIN_MESSAGE_LEN) {
             await sendMsg('Команда Алисе должна содержать не менее двух букв');
 
         } else {
             try {
-                await iot.send({value});
+                await iot.send({value: tts});
             } catch (err) {
                 return sendMsg(err.message);
             }
 
             await sendMsg(
-                `Отправлено:\n\n\`\`\`\n${value}\n\`\`\``,
+                `Отправлено:\n\n\`\`\`\n${tts}\n\`\`\``,
                 {parse_mode: 'Markdown'},
             );
         }
