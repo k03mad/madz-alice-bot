@@ -6,15 +6,13 @@ const {print} = require('@k03mad/utils');
 const {telegram, cloud, cert} = require('../../env');
 
 if (cloud.is) {
-    const options = {
+    const bot = new TelegramBot(telegram.token, {
         webHook: {
             port: telegram.port,
             key: path.join(cert.path, cloud.domain, 'privkey.pem'),
             cert: path.join(cert.path, cloud.domain, 'fullchain.pem'),
         },
-    };
-
-    const bot = new TelegramBot(telegram.token, options);
+    });
 
     bot
         .setWebHook(`https://${cloud.domain}:${telegram.port}/bot${telegram.token}`)

@@ -1,7 +1,7 @@
 {
   "name": "madz-alice-bot",
   "version": "1.0.0",
-  "description": "Alice Telegram Bot",
+  "description": "Alice TTS Telegram Bot",
   "maintainers": [
     "Kirill Molchanov <k03.mad@gmail.com"
   ],
