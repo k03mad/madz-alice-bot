@@ -4,7 +4,7 @@ const bot = require('./telegram/config');
 const errorsHandler = require('./telegram/errors');
 const {iot} = require('@k03mad/utils');
 const {telegram: {allowedChats}} = require('../env');
-const {trimText, MAX_MESSAGE_LEN} = require('./utils/data');
+const {trimText, MAX_MESSAGE_LEN, MIN_MESSAGE_LEN} = require('./utils/data');
 
 errorsHandler(bot);
 
@@ -16,6 +16,9 @@ bot.on('text', async ({text, chat: {id}}) => {
     if (allowedChats.includes(id)) {
         if (valueLen > MAX_MESSAGE_LEN) {
             await sendMsg(`Команда Алисе должна быть не длиннее 100 символов\n\nОтправлено: ${valueLen}`);
+
+        } else if (valueLen < MIN_MESSAGE_LEN) {
+            await sendMsg('Команда Алисе должна содержать не менее двух букв');
 
         } else {
             try {

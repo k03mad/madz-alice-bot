@@ -1,5 +1,6 @@
 'use strict';
 
+const MIN_MESSAGE_LEN = 3;
 const MAX_MESSAGE_LEN = 100;
 
 /**
@@ -12,4 +13,4 @@ const trimText = text => text
     .replace(/ +/g, ' ')
     .trim();
 
-module.exports = {trimText, MAX_MESSAGE_LEN};
+module.exports = {trimText, MIN_MESSAGE_LEN, MAX_MESSAGE_LEN};
