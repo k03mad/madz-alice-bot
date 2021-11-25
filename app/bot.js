@@ -2,8 +2,8 @@
 
 const bot = require('./telegram/config');
 const errorsHandler = require('./telegram/errors');
-const {iot, promise} = require('@k03mad/utils');
-const {MAX_MESSAGE_LEN, MIN_MESSAGE_LEN, RETRY_PAUSE} = require('./utils/const');
+const {iot} = require('@k03mad/utils');
+const {MAX_MESSAGE_LEN, MIN_MESSAGE_LEN} = require('./utils/const');
 const {telegram: {allowedChats}} = require('../env');
 const {trimText} = require('./utils/data');
 
@@ -25,19 +25,10 @@ bot.on('text', async ({text, chat: {id}}) => {
             try {
                 await iot.send({value});
             } catch (err) {
-                if (err.response?.statusCode === 403) {
-                    try {
-                        await promise.delay(RETRY_PAUSE);
-                        await iot.send({value});
-                    } catch (err_) {
-                        return sendMsg(err_.message);
-                    }
-                } else {
-                    return sendMsg(err.message);
-                }
+                return sendMsg(err.message);
             }
 
-            return sendMsg(
+            await sendMsg(
                 `Отправлено:\n\n\`\`\`\n${value}\n\`\`\``,
                 {parse_mode: 'Markdown'},
             );
