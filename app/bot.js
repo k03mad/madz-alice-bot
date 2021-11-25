@@ -32,9 +32,9 @@ bot.on('text', async ({text, chat: {id}}) => {
                     } catch (err_) {
                         return sendMsg(err_.message);
                     }
+                } else {
+                    return sendMsg(err.message);
                 }
-
-                return sendMsg(err.message);
             }
 
             return sendMsg(
