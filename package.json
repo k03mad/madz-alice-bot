@@ -29,7 +29,7 @@
 	"scripts": {
 		"lint": "eslint ./ --report-unused-disable-directives --format=codeframe --ignore-pattern='!.*'",
 		"setup": "npm i",
-		"debug": "DEBUG=* nodemon -e js,json,yml,md ./app/bot",
+		"debug": "DEBUG=* nodemon -e js ./app/bot",
 		"start": "pm2 start pm2.json",
 		"prepare": "husky install"
 	}
