@@ -25,7 +25,7 @@ bot.on('text', async ({text, chat: {id}}) => {
             try {
                 await iot.send({value});
             } catch (err) {
-                if (err.response.statusCode === 403) {
+                if (err.response?.statusCode === 403) {
                     try {
                         await promise.delay(RETRY_PAUSE);
                         await iot.send({value});
