@@ -7,6 +7,7 @@
 const trimText = text => text
     .replaceAll('!', ',')
     .replace(/\n+/g, '. ')
+    .replace(/\.+/, '.')
     .replace(/[^\d ,.:=?a-zа-яё-]/gi, ' ')
     .replace(/ +/g, ' ')
     .replaceAll(' .', '.')
