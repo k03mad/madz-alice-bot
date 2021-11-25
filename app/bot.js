@@ -2,9 +2,10 @@
 
 const bot = require('./telegram/config');
 const errorsHandler = require('./telegram/errors');
-const {iot} = require('@k03mad/utils');
+const {iot, promise} = require('@k03mad/utils');
+const {MAX_MESSAGE_LEN, MIN_MESSAGE_LEN, RETRY_PAUSE} = require('./utils/const');
 const {telegram: {allowedChats}} = require('../env');
-const {trimText, MAX_MESSAGE_LEN, MIN_MESSAGE_LEN} = require('./utils/data');
+const {trimText} = require('./utils/data');
 
 errorsHandler(bot);
 
@@ -23,10 +24,16 @@ bot.on('text', async ({text, chat: {id}}) => {
         } else {
             try {
                 await iot.send({value});
-                await sendMsg('✓');
-            } catch (err) {
-                await sendMsg(err.message);
+            } catch {
+                try {
+                    await promise.delay(RETRY_PAUSE);
+                    await iot.send({value});
+                } catch (err) {
+                    return sendMsg(err.message);
+                }
             }
+
+            return sendMsg('✓');
         }
     }
 });
